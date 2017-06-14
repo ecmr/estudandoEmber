@@ -1,0 +1,30 @@
+<h1 {{action "wasClicked" "Hedding"}}>Menu tracker</h1>
+<p>Our restaurant is {{restaurant.name}}. We've been open for {{restaurant.yearOpen}} year(s).</p>
+<p id="explanation">Menu tracker helps you see what dishes are avaliable today.</p>
+<button {{action "wasClicked" "Button"}}>Click me!</button>
+<p><strong>{{menuLength}}</strong> foods total!</p>
+<p><strong>{{avaliableItems.length}}</strong> foods avaliable</p>
+<p>{{qtdeTotal}} total pedidos.</p>
+<ul>
+
+  {{#each model as |food|}}
+    {{#if food.isAvaliable}}
+      <li>
+        {{food.name}}!
+        <button {{action "makeUnavaliable" food}}>Make Unavaliable</button>
+      </li>
+    {{else}}
+      <li class="not-avaliable">
+        {{food.name}}!
+        <button {{action "makeAvaliable" food}}>Make Avaliable</button>
+        <button {{action 'destroyItem' food}}>Delete</button>
+      </li>
+      <strong>Number of suit(s):</strong>
+      <button {{action "Subtrair" food }}>-</button>
+      {{food.qtde}}
+      <button {{action "Somar" food }}>+</button>
+    {{/if}}
+  {{/each}}
+</ul>
+{{input value=newItem}}
+<button {{action 'saveNewItem'}}>Save</button>
